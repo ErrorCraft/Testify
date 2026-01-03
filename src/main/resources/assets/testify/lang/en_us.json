@@ -1,0 +1,7 @@
+{
+  "test.error.item_stack.unexpected_item": "Expected item stack to be %s, got %s instead",
+  "test.error.item_stack.unknown_data_component": "Expected item stack to have the %s data component",
+  "test.error.item_stack.invalid_data_component": "Expected item stack not to have the %s data component",
+  "test.error.item_stack.is_not_empty": "Expected item stack to be empty, got %s instead",
+  "test.error.item_stack.is_empty": "Expected item stack not to be empty"
+}

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.errorcraft.testify.internal.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "gametest.framework.GameTestHelperExtender"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

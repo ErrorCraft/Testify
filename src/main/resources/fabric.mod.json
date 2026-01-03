@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "testify",
+  "version": "${version}",
+  "name": "Testify",
+  "description": "A mod that provides a common set of game tests for mods that want to ensure vanilla compatibility.",
+  "authors": [
+    "ErrorCraft"
+  ],
+  "contact": {
+    "homepage": "https://errorcraft.net/testify",
+    "sources": "https://github.com/ErrorCraft/Testify"
+  },
+  "license": "Apache-2.0",
+  "icon": "assets/testify/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-gametest": [
+      "net.errorcraft.testify.test.SimpleItemStackTestSuite"
+    ]
+  },
+  "mixins": [
+    "testify.mixins.json"
+  ],
+  "accessWidener": "testify.classtweaker",
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~26.1-",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
