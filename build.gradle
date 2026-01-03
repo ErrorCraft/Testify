@@ -33,7 +33,9 @@ loom {
 		}
 		client {
 			name "GameTest Client"
-			vmArg "-Dfabric-api.gametest.structures.output-dir=${file("src/main/resources/data/testify/gametest/structures")}"
+			vmArg "-Dtestify.gametest.structures.output-dir=${file("src/main/resources/data")}"
+			vmArg "-DMC_DEBUG_ENABLED"
+			vmArg "-DMC_DEBUG_SAVE_STRUCTURES_AS_SNBT"
 
 			runDir "run"
 			source sourceSets.client

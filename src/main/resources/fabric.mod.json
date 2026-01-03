@@ -16,6 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "fabric-gametest": [
+      "net.errorcraft.testify.test.item.ArmorStandTestSuite",
       "net.errorcraft.testify.test.SimpleItemStackTestSuite"
     ]
   },

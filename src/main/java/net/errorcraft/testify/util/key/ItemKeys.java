@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 
 public class ItemKeys {
     public static final ResourceKey<Item> APPLE = of("apple");
+    public static final ResourceKey<Item> ARMOR_STAND = of("armor_stand");
     public static final ResourceKey<Item> IRON_CHESTPLATE = of("iron_chestplate");
 
     private ItemKeys() {}
