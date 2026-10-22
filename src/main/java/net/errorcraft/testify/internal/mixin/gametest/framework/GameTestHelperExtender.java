@@ -20,7 +20,6 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -67,7 +66,7 @@ public abstract class GameTestHelperExtender implements GameTestHelperAccess {
     @Override
     public Player testify$makeMockPlayer(GameType gameMode, BlockPos pos) {
         Player player = this.makeMockPlayer(gameMode);
-        player.setPos(this.absolutePos(pos).getBottomCenter());
+        player.setPos(Vec3.atBottomCenterOf(this.absolutePos(pos)));
         return player;
     }
 
@@ -93,7 +92,6 @@ public abstract class GameTestHelperExtender implements GameTestHelperAccess {
     }
 
     @Override
-    @NotNull
     public <T> T testify$getDataComponent(ItemStack stack, DataComponentType<T> type) {
         T component = stack.get(type);
         if (component == null) {
@@ -121,7 +119,7 @@ public abstract class GameTestHelperExtender implements GameTestHelperAccess {
         at = @At("RETURN")
     )
     private Player setDefaultPositionSoMockPlayerIsAlwaysLoaded(Player original) {
-        original.setPos(this.absolutePos(BlockPos.ZERO).getBottomCenter());
+        original.setPos(Vec3.atBottomCenterOf(this.absolutePos(BlockPos.ZERO)));
         return original;
     }
 }

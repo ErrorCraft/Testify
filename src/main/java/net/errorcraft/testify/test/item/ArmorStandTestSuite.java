@@ -1,12 +1,12 @@
 package net.errorcraft.testify.test.item;
 
+import net.errorcraft.testify.api.GameTest;
 import net.errorcraft.testify.api.assertion.Assert;
 import net.errorcraft.testify.util.key.EntityTypeKeys;
-import net.errorcraft.testify.util.key.ItemKeys;
-import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.references.ItemIds;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +22,7 @@ public class ArmorStandTestSuite {
 
     @GameTest(structure = "testify:item.armor_stand.platform")
     public void usingArmorStandOnGroundPlacesArmorStand(GameTestHelper helper) {
-        ItemStack stack = helper.testify$createStack(ItemKeys.ARMOR_STAND);
+        ItemStack stack = helper.testify$createStack(ItemIds.ARMOR_STAND);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         helper.getLevel().addFreshEntity(player);
@@ -32,7 +32,7 @@ public class ArmorStandTestSuite {
 
     @GameTest(structure = "testify:item.armor_stand.platform.high")
     public void usingArmorStandOnCeilingDoesNotPlaceArmorStand(GameTestHelper helper) {
-        ItemStack stack = helper.testify$createStack(ItemKeys.ARMOR_STAND);
+        ItemStack stack = helper.testify$createStack(ItemIds.ARMOR_STAND);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         helper.getLevel().addFreshEntity(player);
@@ -42,7 +42,7 @@ public class ArmorStandTestSuite {
 
     @GameTest(structure = "testify:item.armor_stand.platform.not_enough_room")
     public void usingArmorStandOnGroundWithNotEnoughRoomDoesNotPlaceArmorStand(GameTestHelper helper) {
-        ItemStack stack = helper.testify$createStack(ItemKeys.ARMOR_STAND);
+        ItemStack stack = helper.testify$createStack(ItemIds.ARMOR_STAND);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         helper.getLevel().addFreshEntity(player);
@@ -52,7 +52,7 @@ public class ArmorStandTestSuite {
 
     @GameTest(structure = "testify:item.armor_stand.platform")
     public void usingArmorStandOnGroundWhileRotatedPlacesArmorStandRotated(GameTestHelper helper) {
-        ItemStack stack = helper.testify$createStack(ItemKeys.ARMOR_STAND);
+        ItemStack stack = helper.testify$createStack(ItemIds.ARMOR_STAND);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         player.setYRot(USER_ANGLE);
