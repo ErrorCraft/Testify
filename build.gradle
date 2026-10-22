@@ -45,6 +45,8 @@ loom {
 	accessWidenerPath = file("src/main/resources/testify.classtweaker")
 }
 
+apply from: 'gradle/package-info.gradle'
+
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
