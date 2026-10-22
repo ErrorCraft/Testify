@@ -95,7 +95,7 @@ public abstract class GameTestHelperExtender implements GameTestHelperAccess {
     public <T> T testify$getDataComponent(ItemStack stack, DataComponentType<T> type) {
         T component = stack.get(type);
         if (component == null) {
-            throw this.assertionException("test.error.item_stack.unknown_data_component", type);
+            throw this.assertionException("test.error.general.expected_data_component", type);
         }
 
         return component;

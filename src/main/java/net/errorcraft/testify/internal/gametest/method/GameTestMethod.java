@@ -1,5 +1,6 @@
 package net.errorcraft.testify.internal.gametest.method;
 
+import net.errorcraft.testify.api.Asserter;
 import net.errorcraft.testify.api.GameTest;
 import net.errorcraft.testify.internal.Util;
 import net.fabricmc.loader.api.entrypoint.EntrypointContainer;
@@ -23,7 +24,8 @@ public record GameTestMethod(Method method, EntrypointContainer<Object> instance
         try {
             this.method.invoke(
                 this.instance.getEntrypoint(),
-                helper
+                helper,
+                new Asserter(helper)
             );
         } catch (InvocationTargetException e) {
             if (e.getCause() instanceof RuntimeException realException) {
