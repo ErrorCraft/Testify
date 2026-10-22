@@ -86,7 +86,7 @@ public class GameTestFinder {
         for (int i = 0; i < actualParameterTypes.length; i++) {
             Class<?> actualParameterType = actualParameterTypes[i];
             Class<?> expectedParameterType = parameterTypes[i];
-            if (!actualParameterType.isAssignableFrom(expectedParameterType)) {
+            if (!expectedParameterType.isAssignableFrom(actualParameterType)) {
                 problems.accept("Parameter " + (i + 1) + " must extend " + expectedParameterType.getName());
             }
         }

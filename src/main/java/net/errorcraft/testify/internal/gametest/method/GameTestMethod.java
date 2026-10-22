@@ -1,12 +1,12 @@
 package net.errorcraft.testify.internal.gametest.method;
 
-import net.errorcraft.testify.api.Asserter;
 import net.errorcraft.testify.api.GameTest;
 import net.errorcraft.testify.internal.Util;
 import net.fabricmc.loader.api.entrypoint.EntrypointContainer;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.Identifier;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -22,10 +22,11 @@ public record GameTestMethod(Method method, EntrypointContainer<Object> instance
 
     public void execute(GameTestHelper helper) {
         try {
+            Constructor<?> asserterConstructor = this.method.getParameterTypes()[1].getConstructor(GameTestHelper.class);
             this.method.invoke(
                 this.instance.getEntrypoint(),
                 helper,
-                new Asserter(helper)
+                asserterConstructor.newInstance(helper)
             );
         } catch (InvocationTargetException e) {
             if (e.getCause() instanceof RuntimeException realException) {
