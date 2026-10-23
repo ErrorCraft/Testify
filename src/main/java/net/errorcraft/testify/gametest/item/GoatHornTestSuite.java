@@ -1,6 +1,5 @@
 package net.errorcraft.testify.gametest.item;
 
-import net.errorcraft.testify.api.Asserter;
 import net.errorcraft.testify.api.GameTest;
 import net.errorcraft.testify.api.TestifyGameTestHelper;
 import net.minecraft.references.ItemIds;
@@ -11,13 +10,13 @@ import net.minecraft.world.level.GameType;
 
 public class GoatHornTestSuite {
     @GameTest
-    public void usingGoatHornImmediatelySetsCooldown(TestifyGameTestHelper helper, Asserter asserter) {
+    public void usingGoatHornImmediatelySetsCooldown(TestifyGameTestHelper helper) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         ItemStack goatHorn = helper.createStack(ItemIds.GOAT_HORN);
         player.setItemInHand(InteractionHand.MAIN_HAND, goatHorn);
         helper.succeedIf(() -> {
             goatHorn.use(helper.getLevel(), player, InteractionHand.MAIN_HAND);
-            asserter.isTrue(
+            helper.assertThat().isTrue(
                 player.getCooldowns().isOnCooldown(goatHorn),
                 () -> "Expected Goat Horn to set a cooldown immediately"
             );

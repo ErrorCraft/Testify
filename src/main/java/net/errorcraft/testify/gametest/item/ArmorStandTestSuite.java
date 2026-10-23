@@ -1,6 +1,5 @@
 package net.errorcraft.testify.gametest.item;
 
-import net.errorcraft.testify.api.Asserter;
 import net.errorcraft.testify.api.GameTest;
 import net.errorcraft.testify.api.TestifyGameTestHelper;
 import net.minecraft.core.BlockPos;
@@ -21,47 +20,47 @@ public class ArmorStandTestSuite {
     private static final float SPAWNED_ENTITY_ANGLE = USER_ANGLE - 180.0f;
 
     @GameTest(structure = "testify:item.armor_stand.platform")
-    public void usingArmorStandOnGroundPlacesArmorStand(TestifyGameTestHelper helper, Asserter asserter) {
+    public void usingArmorStandOnGroundPlacesArmorStand(TestifyGameTestHelper helper) {
         ItemStack stack = helper.createStack(ItemIds.ARMOR_STAND);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         helper.getLevel().addFreshEntity(player);
         helper.interactWithBlock(GROUND_USE_POSITION, player, Direction.UP);
-        helper.succeedIf(() -> asserter.entityType(EntityTypeIds.ARMOR_STAND)
+        helper.succeedIf(() -> helper.assertThat().entityType(EntityTypeIds.ARMOR_STAND)
             .existsAt(PLACED_ENTITY_POSITION));
     }
 
     @GameTest(structure = "testify:item.armor_stand.platform.high")
-    public void usingArmorStandOnCeilingDoesNotPlaceArmorStand(TestifyGameTestHelper helper, Asserter asserter) {
+    public void usingArmorStandOnCeilingDoesNotPlaceArmorStand(TestifyGameTestHelper helper) {
         ItemStack stack = helper.createStack(ItemIds.ARMOR_STAND);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         helper.getLevel().addFreshEntity(player);
         helper.interactWithBlock(HIGH_USE_POSITION, player, Direction.DOWN);
-        helper.succeedIf(() -> asserter.entityType(EntityTypeIds.ARMOR_STAND)
+        helper.succeedIf(() -> helper.assertThat().entityType(EntityTypeIds.ARMOR_STAND)
             .doesNotExist());
     }
 
     @GameTest(structure = "testify:item.armor_stand.platform.not_enough_room")
-    public void usingArmorStandOnGroundWithNotEnoughRoomDoesNotPlaceArmorStand(TestifyGameTestHelper helper, Asserter asserter) {
+    public void usingArmorStandOnGroundWithNotEnoughRoomDoesNotPlaceArmorStand(TestifyGameTestHelper helper) {
         ItemStack stack = helper.createStack(ItemIds.ARMOR_STAND);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         helper.getLevel().addFreshEntity(player);
         helper.interactWithBlock(GROUND_USE_POSITION, player, Direction.UP);
-        helper.succeedIf(() -> asserter.entityType(EntityTypeIds.ARMOR_STAND)
+        helper.succeedIf(() -> helper.assertThat().entityType(EntityTypeIds.ARMOR_STAND)
             .doesNotExist());
     }
 
     @GameTest(structure = "testify:item.armor_stand.platform")
-    public void usingArmorStandOnGroundWhileRotatedPlacesArmorStandRotated(TestifyGameTestHelper helper, Asserter asserter) {
+    public void usingArmorStandOnGroundWhileRotatedPlacesArmorStandRotated(TestifyGameTestHelper helper) {
         ItemStack stack = helper.createStack(ItemIds.ARMOR_STAND);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         player.setYRot(USER_ANGLE);
         helper.getLevel().addFreshEntity(player);
         helper.interactWithBlock(GROUND_USE_POSITION, player, Direction.UP);
-        helper.succeedIf(() -> asserter.entityType(EntityTypeIds.ARMOR_STAND)
+        helper.succeedIf(() -> helper.assertThat().entityType(EntityTypeIds.ARMOR_STAND)
             .existsAt(
                 PLACED_ENTITY_POSITION,
                 ArmorStand.class,

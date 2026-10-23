@@ -1,6 +1,5 @@
 package net.errorcraft.testify.gametest.item;
 
-import net.errorcraft.testify.api.Asserter;
 import net.errorcraft.testify.api.GameTest;
 import net.errorcraft.testify.api.TestifyGameTestHelper;
 import net.minecraft.references.ItemIds;
@@ -14,7 +13,7 @@ import net.minecraft.world.level.GameType;
 
 public class HoneyBottleTestSuite {
     @GameTest
-    public void consumingHoneyBottleRemovesPoisonStatusEffect(TestifyGameTestHelper helper, Asserter asserter) {
+    public void consumingHoneyBottleRemovesPoisonStatusEffect(TestifyGameTestHelper helper) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.getFoodData().setFoodLevel(0);
         player.addEffect(new MobEffectInstance(MobEffects.POISON, MobEffectInstance.INFINITE_DURATION));
@@ -26,7 +25,7 @@ public class HoneyBottleTestSuite {
             .thenExecute(() -> honeyBottle.use(level, player, InteractionHand.MAIN_HAND))
             .thenExecuteAfter(
                 honeyBottle.getUseDuration(player),
-                () -> asserter.livingEntity(player).doesNotHaveEffect(MobEffects.POISON)
+                () -> helper.assertThat().livingEntity(player).doesNotHaveEffect(MobEffects.POISON)
             )
             .thenSucceed();
     }

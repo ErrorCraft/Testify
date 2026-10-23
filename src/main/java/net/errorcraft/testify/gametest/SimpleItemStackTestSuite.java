@@ -1,6 +1,5 @@
 package net.errorcraft.testify.gametest;
 
-import net.errorcraft.testify.api.Asserter;
 import net.errorcraft.testify.api.GameTest;
 import net.errorcraft.testify.api.TestifyGameTestHelper;
 import net.minecraft.core.component.DataComponents;
@@ -14,7 +13,7 @@ import net.minecraft.world.level.GameType;
 
 public class SimpleItemStackTestSuite {
     @GameTest
-    public void eatingFoodItemAddsNutrition(TestifyGameTestHelper helper, Asserter asserter) {
+    public void eatingFoodItemAddsNutrition(TestifyGameTestHelper helper) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.getFoodData().setFoodLevel(0);
         ItemStack stack = helper.createStack(ItemIds.APPLE);
@@ -25,18 +24,20 @@ public class SimpleItemStackTestSuite {
         helper.startSequence()
             .thenExecuteAfter(
                 stack.getUseDuration(player),
-                () -> asserter.ints(player.getFoodData().getFoodLevel(), "nutrition")
+                () -> helper.assertThat()
+                    .ints(player.getFoodData().getFoodLevel(), "nutrition")
                     .equals(food.nutrition())
             ).thenSucceed();
     }
 
     @GameTest
-    public void usingEquippableItemEquipsIt(TestifyGameTestHelper helper, Asserter asserter) {
+    public void usingEquippableItemEquipsIt(TestifyGameTestHelper helper) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         ItemStack stack = helper.createStack(ItemIds.IRON_CHESTPLATE);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         stack.use(helper.getLevel(), player, InteractionHand.MAIN_HAND);
-        helper.succeedIf(() -> asserter.itemStack(player.getItemBySlot(EquipmentSlot.CHEST))
+        helper.succeedIf(() -> helper.assertThat()
+            .itemStack(player.getItemBySlot(EquipmentSlot.CHEST))
             .is(ItemIds.IRON_CHESTPLATE));
     }
 }

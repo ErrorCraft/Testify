@@ -1,12 +1,12 @@
 package net.errorcraft.testify.api;
 
-import net.errorcraft.testify.internal.mixin.gametest.framework.GameTestHelperAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.gametest.framework.GameTestInfo;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -22,8 +22,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class TestifyGameTestHelper extends GameTestHelper {
-    public TestifyGameTestHelper(GameTestHelper testInfo) {
-        super(((GameTestHelperAccessor) testInfo).testify$testInfo());
+    public TestifyGameTestHelper(GameTestInfo testInfo) {
+        super(testInfo);
+    }
+
+    public Asserter assertThat() {
+        return new Asserter(this);
     }
 
     public <E extends Entity> List<E> findEntitiesAt(EntityType<E> type, BlockPos pos) {

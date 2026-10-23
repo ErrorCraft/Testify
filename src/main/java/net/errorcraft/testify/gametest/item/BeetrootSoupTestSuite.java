@@ -1,6 +1,5 @@
 package net.errorcraft.testify.gametest.item;
 
-import net.errorcraft.testify.api.Asserter;
 import net.errorcraft.testify.api.GameTest;
 import net.errorcraft.testify.api.TestifyGameTestHelper;
 import net.minecraft.references.ItemIds;
@@ -12,7 +11,7 @@ import net.minecraft.world.level.GameType;
 
 public class BeetrootSoupTestSuite {
     @GameTest
-    public void consumingBeetrootSoupLeavesBowlAfterConsuming(TestifyGameTestHelper helper, Asserter asserter) {
+    public void consumingBeetrootSoupLeavesBowlAfterConsuming(TestifyGameTestHelper helper) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.getFoodData().setFoodLevel(0);
         ItemStack beetrootSoup = helper.createStack(ItemIds.BEETROOT_SOUP);
@@ -23,7 +22,7 @@ public class BeetrootSoupTestSuite {
             .thenExecute(() -> beetrootSoup.use(level, player, InteractionHand.MAIN_HAND))
             .thenExecuteAfter(
                 beetrootSoup.getUseDuration(player),
-                () -> asserter.isTrue(
+                () -> helper.assertThat().isTrue(
                     player.getInventory().contains(stack -> stack.is(ItemIds.BOWL)),
                     () -> "Expected Player to have a Bowl in their inventory"
                 )
