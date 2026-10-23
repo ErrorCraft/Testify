@@ -20,6 +20,9 @@
     ],
     "testify-gametest": [
       "net.errorcraft.testify.gametest.item.ArmorStandTestSuite",
+      "net.errorcraft.testify.gametest.item.BeetrootSoupTestSuite",
+      "net.errorcraft.testify.gametest.item.GoatHornTestSuite",
+      "net.errorcraft.testify.gametest.item.HoneyBottleTestSuite",
       "net.errorcraft.testify.gametest.SimpleItemStackTestSuite"
     ]
   },

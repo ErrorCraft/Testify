@@ -3,6 +3,8 @@
   "test.error.general.expected_type": "Expected %s to be %s, got %s instead",
   "test.error.general.expected_data_component": "Expected %s to have the %s data component",
   "test.error.general.did_not_expect_data_component": "Expected %s not to have the %s data component",
+  "test.error.entity.expected_effect": "Expected entity %s to have effect %s",
+  "test.error.entity.did_not_expect_effect": "Expected entity %s not to have effect %s",
   "test.error.item_stack.expected_empty": "Expected item stack to be empty, got %s instead",
   "test.error.item_stack.expected_not_empty": "Expected item stack not to be empty"
 }

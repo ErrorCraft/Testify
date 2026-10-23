@@ -1,6 +1,7 @@
 package net.errorcraft.testify.internal.assertion.entity;
 
 import net.errorcraft.testify.api.Asserter;
+import net.errorcraft.testify.api.assertion.entity.EntityAssert;
 import net.errorcraft.testify.api.assertion.entity.EntityTypeAssert;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -34,12 +35,12 @@ public class EntityTypeAssertImpl implements EntityTypeAssert {
     }
 
     @Override
-    public <E extends Entity> EntityTypeAssert existsAt(BlockPos pos, Class<E> entityClass, EntityConsumer<E> entityAssert) {
+    public <A extends EntityAssert<A, E>, E extends Entity> EntityTypeAssert existsAt(BlockPos pos, Class<E> entityClass, EntityConsumer<A, E> entity) {
         this.asserter.isInstance(
             this.asserter.helper().findOneEntityAt(this.type, pos),
             entityClass,
             "entity",
-            entity -> entityAssert.accept(this.asserter.entity(entity))
+            actualEntity -> entity.accept(this.asserter.entity(actualEntity))
         );
         return this;
     }

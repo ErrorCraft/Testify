@@ -6,8 +6,8 @@ import net.minecraft.world.entity.Entity;
 import java.util.function.Consumer;
 
 @SuppressWarnings({"UnusedReturnValue", "unused"})
-public interface EntityAssert<E extends Entity> {
+public interface EntityAssert<A extends EntityAssert<A, E>, E extends Entity> {
     E entity();
-    EntityAssert<E> xRotation(Consumer<FloatsAssert> xRotation);
-    EntityAssert<E> yRotation(Consumer<FloatsAssert> yRotation);
+    A xRotation(Consumer<FloatsAssert> xRotation);
+    A yRotation(Consumer<FloatsAssert> yRotation);
 }

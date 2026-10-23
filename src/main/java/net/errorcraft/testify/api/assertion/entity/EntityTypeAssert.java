@@ -6,11 +6,11 @@ import net.minecraft.world.entity.Entity;
 @SuppressWarnings({"UnusedReturnValue", "unused"})
 public interface EntityTypeAssert {
     EntityTypeAssert existsAt(BlockPos pos);
-    <E extends Entity> EntityTypeAssert existsAt(BlockPos pos, Class<E> entityClass, EntityConsumer<E> entityAssert);
+    <A extends EntityAssert<A, E>, E extends Entity> EntityTypeAssert existsAt(BlockPos pos, Class<E> entityClass, EntityConsumer<A, E> entity);
     EntityTypeAssert doesNotExist();
 
     @FunctionalInterface
-    interface EntityConsumer<E extends Entity> {
-        void accept(EntityAssert<E> entity);
+    interface EntityConsumer<A extends EntityAssert<A, E>, E extends Entity> {
+        void accept(EntityAssert<A, E> entity);
     }
 }

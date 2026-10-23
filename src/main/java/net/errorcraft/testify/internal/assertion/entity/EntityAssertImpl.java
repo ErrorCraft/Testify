@@ -9,20 +9,25 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class EntityAssertImpl<E extends Entity> implements EntityAssert<E> {
-    private final Asserter asserter;
-    private final E entity;
+public class EntityAssertImpl<A extends EntityAssert<A, E>, E extends Entity> implements EntityAssert<A, E> {
+    protected final Asserter asserter;
+    protected final E entity;
 
-    private EntityAssertImpl(Asserter asserter, E entity) {
+    protected EntityAssertImpl(Asserter asserter, E entity) {
         this.asserter = asserter;
         this.entity = entity;
     }
 
-    public static <E extends Entity> EntityAssert<E> create(Asserter asserter, @Nullable E entity) {
+    public static <A extends EntityAssert<A, E>, E extends Entity> EntityAssert<A, E> create(Asserter asserter, @Nullable E entity) {
         return new EntityAssertImpl<>(
             asserter,
             asserter.isNotNull(entity, "entity")
         );
+    }
+
+    @SuppressWarnings("unchecked")
+    private A self() {
+        return (A) this;
     }
 
     @Override
@@ -31,14 +36,14 @@ public class EntityAssertImpl<E extends Entity> implements EntityAssert<E> {
     }
 
     @Override
-    public EntityAssert<E> xRotation(Consumer<FloatsAssert> xRotation) {
+    public A xRotation(Consumer<FloatsAssert> xRotation) {
         xRotation.accept(this.asserter.floats(Mth.wrapDegrees(this.entity.getXRot()), "x rotation"));
-        return this;
+        return this.self();
     }
 
     @Override
-    public EntityAssert<E> yRotation(Consumer<FloatsAssert> yRotation) {
+    public A yRotation(Consumer<FloatsAssert> yRotation) {
         yRotation.accept(this.asserter.floats(Mth.wrapDegrees(this.entity.getYRot()), "y rotation"));
-        return this;
+        return this.self();
     }
 }

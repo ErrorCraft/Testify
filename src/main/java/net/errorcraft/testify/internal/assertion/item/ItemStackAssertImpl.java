@@ -14,16 +14,19 @@ import java.util.function.Consumer;
 public class ItemStackAssertImpl implements ItemStackAssert {
     private final Asserter asserter;
     private final ItemStack stack;
+    private final String name;
 
-    private ItemStackAssertImpl(Asserter asserter, ItemStack stack) {
+    private ItemStackAssertImpl(Asserter asserter, ItemStack stack, String name) {
         this.asserter = asserter;
         this.stack = stack;
+        this.name = name;
     }
 
-    public static ItemStackAssert create(Asserter asserter, @Nullable ItemStack stack) {
+    public static ItemStackAssert create(Asserter asserter, @Nullable ItemStack stack, String name) {
         return new ItemStackAssertImpl(
             asserter,
-            asserter.isNotNull(stack, "item stack")
+            asserter.isNotNull(stack, "item stack"),
+            name
         );
     }
 
@@ -33,7 +36,7 @@ public class ItemStackAssertImpl implements ItemStackAssert {
         if (!this.stack.is(id)) {
             throw this.asserter.helper().assertionException(
                 "test.error.general.expected_type",
-                "item stack",
+                this.name,
                 id.identifier(),
                 this.stack.typeHolder().getRegisteredName()
             );

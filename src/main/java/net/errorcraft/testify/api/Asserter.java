@@ -4,16 +4,19 @@ import net.errorcraft.testify.api.assertion.base.FloatsAssert;
 import net.errorcraft.testify.api.assertion.base.IntsAssert;
 import net.errorcraft.testify.api.assertion.entity.EntityAssert;
 import net.errorcraft.testify.api.assertion.entity.EntityTypeAssert;
+import net.errorcraft.testify.api.assertion.entity.LivingEntityAssert;
 import net.errorcraft.testify.api.assertion.item.ItemStackAssert;
 import net.errorcraft.testify.internal.assertion.base.FloatsAssertImpl;
 import net.errorcraft.testify.internal.assertion.base.IntsAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.EntityAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.EntityTypeAssertImpl;
+import net.errorcraft.testify.internal.assertion.entity.LivingEntityAssertImpl;
 import net.errorcraft.testify.internal.assertion.item.ItemStackAssertImpl;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.Nullable;
@@ -130,11 +133,19 @@ public class Asserter {
         return EntityTypeAssertImpl.create(this, type);
     }
 
-    public <E extends Entity> EntityAssert<E> entity(@Nullable E entity) {
+    public <A extends EntityAssert<A, E>, E extends Entity> EntityAssert<A, E> entity(@Nullable E entity) {
         return EntityAssertImpl.create(this, entity);
     }
 
+    public <E extends LivingEntity> LivingEntityAssert<E> livingEntity(E entity) {
+        return LivingEntityAssertImpl.create(this, entity);
+    }
+
     public ItemStackAssert itemStack(@Nullable ItemStack stack) {
-        return ItemStackAssertImpl.create(this, stack);
+        return ItemStackAssertImpl.create(this, stack, "item stack");
+    }
+
+    public ItemStackAssert itemStack(@Nullable ItemStack stack, String name) {
+        return ItemStackAssertImpl.create(this, stack, name);
     }
 }
