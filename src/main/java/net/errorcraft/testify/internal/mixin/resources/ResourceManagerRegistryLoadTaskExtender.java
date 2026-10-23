@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Lifecycle;
 import net.errorcraft.testify.internal.Bootstrapper;
+import net.errorcraft.testify.internal.GameTestSystemProperties;
 import net.minecraft.core.RegistrationInfo;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
@@ -36,7 +37,7 @@ public abstract class ResourceManagerRegistryLoadTaskExtender<T> extends Registr
     )
     private CompletableFuture<Map<Identifier, PendingRegistration<GameTestInstance>>> registerGameTests(CompletableFuture<Map<Identifier, PendingRegistration<GameTestInstance>>> original, RegistryOps.RegistryInfoLookup context) {
         ResourceKey<? extends Registry<?>> registry = this.data.key();
-        if (registry != Registries.TEST_INSTANCE) {
+        if (!GameTestSystemProperties.ENABLED || registry != Registries.TEST_INSTANCE) {
             return original;
         }
 

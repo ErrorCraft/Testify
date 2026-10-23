@@ -1,5 +1,6 @@
 package net.errorcraft.testify.internal.mixin.gametest.framework;
 
+import net.errorcraft.testify.internal.GameTestSystemProperties;
 import net.minecraft.gametest.framework.StructureUtils;
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,11 +20,10 @@ public class StructureUtilsExtender {
     public static Path testStructuresSourceDir;
 
     static {
-        String structureDirectory = System.getProperty("testify.gametest.structures.output-dir");
-        if (structureDirectory != null) {
-            Path structurePath = Paths.get(structureDirectory);
-            testStructuresTargetDir = structurePath;
-            testStructuresSourceDir = structurePath;
+        if (GameTestSystemProperties.ENABLED && GameTestSystemProperties.STRUCTURE_DIRECTORY != null) {
+            Path directory = Paths.get(GameTestSystemProperties.STRUCTURE_DIRECTORY);
+            testStructuresTargetDir = directory;
+            testStructuresSourceDir = directory;
         }
     }
 }

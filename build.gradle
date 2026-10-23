@@ -27,13 +27,16 @@ loom {
 			name "GameTest"
 			vmArg "-Dfabric-api.gametest"
 			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml"
+			vmArg "-Dtestify.gametest"
+			vmArg "-Dtestify.gametest.structure.directory=${file("src/main/resources")}"
 
 			runDir "build/gametest"
 			source sourceSets.main
 		}
 		client {
 			name "GameTest Client"
-			vmArg "-Dtestify.gametest.structures.output-dir=${file("src/main/resources/data")}"
+			vmArg "-Dtestify.gametest"
+			vmArg "-Dtestify.gametest.structure.directory=${file("src/main/resources")}"
 			vmArg "-DMC_DEBUG_ENABLED"
 			vmArg "-DMC_DEBUG_SAVE_STRUCTURES_AS_SNBT"
 

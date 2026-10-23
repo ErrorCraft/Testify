@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface GameTest {
     String environment() default "minecraft:default";
-    String structure();
+    String structure() default "testify:simple_platform";
 }

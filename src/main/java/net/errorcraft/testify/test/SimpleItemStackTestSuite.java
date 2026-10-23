@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 
 public class SimpleItemStackTestSuite {
-    @GameTest(structure = "fabric-gametest-api-v1:empty")
+    @GameTest
     public void eatingFoodItemAddsNutrition(GameTestHelper helper, Asserter asserter) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.getFoodData().setFoodLevel(0);
@@ -30,7 +30,7 @@ public class SimpleItemStackTestSuite {
             ).thenSucceed();
     }
 
-    @GameTest(structure = "fabric-gametest-api-v1:empty")
+    @GameTest
     public void usingEquippableItemEquipsIt(GameTestHelper helper, Asserter asserter) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         ItemStack stack = helper.testify$createStack(ItemIds.IRON_CHESTPLATE);

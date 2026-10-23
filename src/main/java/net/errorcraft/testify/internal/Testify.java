@@ -6,6 +6,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 public class Testify implements ModInitializer {
     @Override
     public void onInitialize() {
+        if (!GameTestSystemProperties.ENABLED) {
+            return;
+        }
+
         Bootstrapper.bootstrapGameTestMethods(BuiltInRegistries.TEST_FUNCTION);
     }
 }
