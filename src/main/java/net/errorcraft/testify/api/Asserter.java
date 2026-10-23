@@ -1,13 +1,17 @@
 package net.errorcraft.testify.api;
 
+import net.errorcraft.testify.api.assertion.base.DoublesAssert;
 import net.errorcraft.testify.api.assertion.base.FloatsAssert;
 import net.errorcraft.testify.api.assertion.base.IntsAssert;
+import net.errorcraft.testify.api.assertion.base.LongsAssert;
 import net.errorcraft.testify.api.assertion.entity.EntityAssert;
 import net.errorcraft.testify.api.assertion.entity.EntityTypeAssert;
 import net.errorcraft.testify.api.assertion.entity.LivingEntityAssert;
 import net.errorcraft.testify.api.assertion.item.ItemStackAssert;
+import net.errorcraft.testify.internal.assertion.base.DoublesAssertImpl;
 import net.errorcraft.testify.internal.assertion.base.FloatsAssertImpl;
 import net.errorcraft.testify.internal.assertion.base.IntsAssertImpl;
+import net.errorcraft.testify.internal.assertion.base.LongsAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.EntityAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.EntityTypeAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.LivingEntityAssertImpl;
@@ -114,19 +118,35 @@ public class Asserter {
     }
 
     public IntsAssert ints(int value) {
-        return IntsAssertImpl.create(this.helper, value, "integer");
+        return IntsAssertImpl.create(this, value, "integer");
     }
 
     public IntsAssert ints(int value, String name) {
-        return IntsAssertImpl.create(this.helper, value, name);
+        return IntsAssertImpl.create(this, value, name);
+    }
+
+    public LongsAssert longs(long value) {
+        return LongsAssertImpl.create(this, value, "integer");
+    }
+
+    public LongsAssert longs(long value, String name) {
+        return LongsAssertImpl.create(this, value, name);
     }
 
     public FloatsAssert floats(float value) {
-        return FloatsAssertImpl.create(this.helper, value, "float");
+        return FloatsAssertImpl.create(this, value, "float");
     }
 
     public FloatsAssert floats(float value, String name) {
-        return FloatsAssertImpl.create(this.helper, value, name);
+        return FloatsAssertImpl.create(this, value, name);
+    }
+
+    public DoublesAssert doubles(double value) {
+        return DoublesAssertImpl.create(this, value, "integer");
+    }
+
+    public DoublesAssert doubles(double value, String name) {
+        return DoublesAssertImpl.create(this, value, name);
     }
 
     public EntityTypeAssert entityType(ResourceKey<EntityType<?>> type) {
