@@ -91,14 +91,14 @@ public class TestifyGameTestHelper extends GameTestHelper {
 
     public <T> T getDataComponent(ItemStack stack, DataComponentType<T> type) {
         T component = stack.get(type);
-        if (component == null) {
-            throw this.assertionException(
-                "test.error.general.expected_data_component",
-                type
-            );
+        if (component != null) {
+            return component;
         }
 
-        return component;
+        throw this.assertionException(
+            "test.error.general.expected_data_component",
+            type
+        );
     }
 
     public <T> Optional<Holder.Reference<T>> getHolder(ResourceKey<T> id) {

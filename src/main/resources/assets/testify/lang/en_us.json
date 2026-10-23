@@ -17,8 +17,12 @@
   "test.error.numeric.expected_non_positive": "Expected %s to be non-positive, got %s instead",
   "test.error.numeric.invalid_modulus": "Modulus must not be 0",
   "test.error.numeric.invalid_epsilon": "Epsilon must be positive, got %s instead",
+  "test.error.registry.expected_id": "Expected %s to be %s, got %s instead",
+  "test.error.registry.did_not_expect_id": "Expected %s not to be %s",
+  "test.error.registry.expected_tag": "Expected %s to be part of %s",
+  "test.error.registry.did_not_expect_tag": "Expected %s not to be part of %s",
   "test.error.entity.expected_effect": "Expected entity %s to have effect %s",
   "test.error.entity.did_not_expect_effect": "Expected entity %s not to have effect %s",
-  "test.error.item_stack.expected_empty": "Expected item stack to be empty, got %s instead",
-  "test.error.item_stack.expected_not_empty": "Expected item stack not to be empty"
+  "test.error.item_stack.expected_empty": "Expected %s to be empty, got %s instead",
+  "test.error.item_stack.did_not_expect_empty": "Expected %s not to be empty"
 }
