@@ -1,6 +1,7 @@
 package net.errorcraft.testify.internal.gametest.method;
 
 import net.errorcraft.testify.api.GameTest;
+import net.errorcraft.testify.api.TestifyGameTestHelper;
 import net.errorcraft.testify.internal.Util;
 import net.fabricmc.loader.api.entrypoint.EntrypointContainer;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -22,11 +23,13 @@ public record GameTestMethod(Method method, EntrypointContainer<Object> instance
 
     public void execute(GameTestHelper helper) {
         try {
-            Constructor<?> asserterConstructor = this.method.getParameterTypes()[1].getConstructor(GameTestHelper.class);
+            Constructor<?> asserterConstructor = this.method.getParameterTypes()[1]
+                .getConstructor(TestifyGameTestHelper.class);
+            TestifyGameTestHelper realHelper = new TestifyGameTestHelper(helper);
             this.method.invoke(
                 this.instance.getEntrypoint(),
-                helper,
-                asserterConstructor.newInstance(helper)
+                realHelper,
+                asserterConstructor.newInstance(realHelper)
             );
         } catch (InvocationTargetException e) {
             if (e.getCause() instanceof RuntimeException realException) {

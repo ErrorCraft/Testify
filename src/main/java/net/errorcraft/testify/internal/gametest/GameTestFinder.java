@@ -2,10 +2,10 @@ package net.errorcraft.testify.internal.gametest;
 
 import net.errorcraft.testify.api.Asserter;
 import net.errorcraft.testify.api.GameTest;
+import net.errorcraft.testify.api.TestifyGameTestHelper;
 import net.errorcraft.testify.internal.gametest.method.GameTestMethod;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.EntrypointContainer;
-import net.minecraft.gametest.framework.GameTestHelper;
 import org.jspecify.annotations.Nullable;
 
 import java.lang.reflect.Method;
@@ -47,7 +47,7 @@ public class GameTestFinder {
 
     private static GameTestMethod createGameTestMethod(Method method, EntrypointContainer<Object> container) {
         List<String> problems = new ArrayList<>();
-        validateMethodSignature(method, problems::add, GameTestHelper.class, Asserter.class);
+        validateMethodSignature(method, problems::add, TestifyGameTestHelper.class, Asserter.class);
         if (!problems.isEmpty()) {
             String methodName = method.getDeclaringClass().getName() + "::" + method.getName();
             throw new UnsupportedOperationException(

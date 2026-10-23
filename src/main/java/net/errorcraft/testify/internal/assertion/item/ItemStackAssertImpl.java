@@ -80,7 +80,7 @@ public class ItemStackAssertImpl implements ItemStackAssert {
 
     @Override
     public <T> ItemStackAssert hasComponent(DataComponentType<T> type, Consumer<T> assertion) {
-        assertion.accept(this.asserter.helper().testify$getDataComponent(this.stack, type));
+        assertion.accept(this.asserter.helper().getDataComponent(this.stack, type));
         return this;
     }
 

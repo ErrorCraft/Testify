@@ -10,7 +10,6 @@ import net.errorcraft.testify.internal.assertion.base.IntsAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.EntityAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.EntityTypeAssertImpl;
 import net.errorcraft.testify.internal.assertion.item.ItemStackAssertImpl;
-import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
@@ -25,13 +24,13 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class Asserter {
-    private final GameTestHelper helper;
+    private final TestifyGameTestHelper helper;
 
-    public Asserter(GameTestHelper helper) {
+    public Asserter(TestifyGameTestHelper helper) {
         this.helper = helper;
     }
 
-    public GameTestHelper helper() {
+    public TestifyGameTestHelper helper() {
         return this.helper;
     }
 

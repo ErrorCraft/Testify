@@ -19,8 +19,8 @@
       "net.errorcraft.testify.internal.Testify"
     ],
     "testify-gametest": [
-      "net.errorcraft.testify.test.item.ArmorStandTestSuite",
-      "net.errorcraft.testify.test.SimpleItemStackTestSuite"
+      "net.errorcraft.testify.gametest.item.ArmorStandTestSuite",
+      "net.errorcraft.testify.gametest.SimpleItemStackTestSuite"
     ]
   },
   "mixins": [

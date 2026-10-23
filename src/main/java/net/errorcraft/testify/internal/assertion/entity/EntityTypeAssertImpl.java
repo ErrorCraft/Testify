@@ -15,7 +15,7 @@ public class EntityTypeAssertImpl implements EntityTypeAssert {
     private EntityTypeAssertImpl(Asserter asserter, ResourceKey<EntityType<?>> type) {
         this.asserter = asserter;
         this.type = asserter.helper()
-            .testify$getHolder(type)
+            .getHolder(type)
             .map(Holder.Reference::value)
             .orElseThrow();
     }
@@ -36,7 +36,7 @@ public class EntityTypeAssertImpl implements EntityTypeAssert {
     @Override
     public <E extends Entity> EntityTypeAssert existsAt(BlockPos pos, Class<E> entityClass, EntityConsumer<E> entityAssert) {
         this.asserter.isInstance(
-            this.asserter.helper().testify$findOneEntityAt(this.type, pos),
+            this.asserter.helper().findOneEntityAt(this.type, pos),
             entityClass,
             "entity",
             entity -> entityAssert.accept(this.asserter.entity(entity))

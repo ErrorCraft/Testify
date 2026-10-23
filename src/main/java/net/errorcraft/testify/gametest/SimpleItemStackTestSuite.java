@@ -1,9 +1,9 @@
-package net.errorcraft.testify.test;
+package net.errorcraft.testify.gametest;
 
 import net.errorcraft.testify.api.Asserter;
 import net.errorcraft.testify.api.GameTest;
+import net.errorcraft.testify.api.TestifyGameTestHelper;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.references.ItemIds;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -14,13 +14,13 @@ import net.minecraft.world.level.GameType;
 
 public class SimpleItemStackTestSuite {
     @GameTest
-    public void eatingFoodItemAddsNutrition(GameTestHelper helper, Asserter asserter) {
+    public void eatingFoodItemAddsNutrition(TestifyGameTestHelper helper, Asserter asserter) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.getFoodData().setFoodLevel(0);
-        ItemStack stack = helper.testify$createStack(ItemIds.APPLE);
+        ItemStack stack = helper.createStack(ItemIds.APPLE);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         helper.getLevel().addFreshEntity(player);
-        FoodProperties food = helper.testify$getDataComponent(stack, DataComponents.FOOD);
+        FoodProperties food = helper.getDataComponent(stack, DataComponents.FOOD);
         stack.use(helper.getLevel(), player, InteractionHand.MAIN_HAND);
         helper.startSequence()
             .thenExecuteAfter(
@@ -31,9 +31,9 @@ public class SimpleItemStackTestSuite {
     }
 
     @GameTest
-    public void usingEquippableItemEquipsIt(GameTestHelper helper, Asserter asserter) {
+    public void usingEquippableItemEquipsIt(TestifyGameTestHelper helper, Asserter asserter) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
-        ItemStack stack = helper.testify$createStack(ItemIds.IRON_CHESTPLATE);
+        ItemStack stack = helper.createStack(ItemIds.IRON_CHESTPLATE);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         stack.use(helper.getLevel(), player, InteractionHand.MAIN_HAND);
         helper.succeedIf(() -> asserter.itemStack(player.getItemBySlot(EquipmentSlot.CHEST))
