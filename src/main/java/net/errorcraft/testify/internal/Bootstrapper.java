@@ -15,8 +15,6 @@ import net.minecraft.gametest.framework.TestEnvironmentDefinition;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Rotation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,28 +40,32 @@ public class Bootstrapper {
             .orElseThrow();
         for (GameTestMethod method : GAME_TEST_FINDER.findMethods()) {
             GameTest gameTest = method.gameTest();
-            ResourceKey<TestEnvironmentDefinition<?>> testEnvironment = ResourceKey.create(
-                Registries.TEST_ENVIRONMENT,
-                Identifier.parse(gameTest.environment())
-            );
             Identifier id = method.id();
             bootstrapper.accept(
                 id,
                 new FunctionGameTestInstance(
                     ResourceKey.create(Registries.TEST_FUNCTION, id),
                     new TestData<>(
-                        testEnvironments.getOrThrow(testEnvironment),
-                        Level.OVERWORLD,
+                        testEnvironments.getOrThrow(
+                            ResourceKey.create(
+                                Registries.TEST_ENVIRONMENT,
+                                Identifier.parse(gameTest.environment())
+                            )
+                        ),
+                        ResourceKey.create(
+                            Registries.DIMENSION,
+                            Identifier.parse(gameTest.dimension())
+                        ),
                         Identifier.parse(gameTest.structure()),
-                        100,
-                        0,
-                        true,
-                        Rotation.NONE,
-                        false,
-                        1,
-                        1,
-                        false,
-                        0
+                        gameTest.maxTicks(),
+                        gameTest.setupTicks(),
+                        gameTest.required(),
+                        gameTest.rotation(),
+                        gameTest.manualOnly(),
+                        gameTest.maxAttempts(),
+                        gameTest.requiredSuccesses(),
+                        gameTest.skyAccess(),
+                        gameTest.padding()
                     )
                 )
             );
