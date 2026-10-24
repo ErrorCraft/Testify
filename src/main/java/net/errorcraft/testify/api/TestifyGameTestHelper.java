@@ -5,8 +5,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.gametest.framework.GameTestAssertException;
+import net.minecraft.gametest.framework.GameTestAssertPosException;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.gametest.framework.GameTestInfo;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -20,6 +23,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class TestifyGameTestHelper extends GameTestHelper {
     public TestifyGameTestHelper(GameTestInfo testInfo) {
@@ -28,6 +32,14 @@ public class TestifyGameTestHelper extends GameTestHelper {
 
     public Asserter assertThat() {
         return new Asserter(this);
+    }
+
+    public GameTestAssertException assertionException(Supplier<String> description) {
+        return this.assertionException(Component.literal(description.get()));
+    }
+
+    public GameTestAssertPosException assertionException(BlockPos pos, Supplier<String> description) {
+        return this.assertionException(pos, Component.literal(description.get()));
     }
 
     public <E extends Entity> List<E> findEntitiesAt(EntityType<E> type, BlockPos pos) {

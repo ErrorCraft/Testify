@@ -21,6 +21,7 @@
   "test.error.registry.did_not_expect_id": "Expected %s not to be %s",
   "test.error.registry.expected_tag": "Expected %s to be part of %s",
   "test.error.registry.did_not_expect_tag": "Expected %s not to be part of %s",
+  "test.error.block.did_not_expect_property_value": "Expected block state property %s not to be %s",
   "test.error.entity.expected_effect": "Expected entity %s to have effect %s",
   "test.error.entity.did_not_expect_effect": "Expected entity %s not to have effect %s",
   "test.error.item_stack.expected_empty": "Expected %s to be empty, got %s instead",

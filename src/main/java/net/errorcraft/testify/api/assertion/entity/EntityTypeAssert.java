@@ -5,6 +5,7 @@ import net.minecraft.world.entity.Entity;
 
 @SuppressWarnings({"UnusedReturnValue", "unused"})
 public interface EntityTypeAssert {
+    EntityTypeAssert exists();
     EntityTypeAssert existsAt(BlockPos pos);
     <A extends EntityAssert<A, E>, E extends Entity> EntityTypeAssert existsAt(BlockPos pos, Class<E> entityClass, EntityConsumer<A, E> entity);
     EntityTypeAssert doesNotExist();

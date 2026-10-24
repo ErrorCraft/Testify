@@ -4,6 +4,7 @@ import net.errorcraft.testify.api.assertion.base.DoublesAssert;
 import net.errorcraft.testify.api.assertion.base.FloatsAssert;
 import net.errorcraft.testify.api.assertion.base.IntsAssert;
 import net.errorcraft.testify.api.assertion.base.LongsAssert;
+import net.errorcraft.testify.api.assertion.block.BlockStateAssert;
 import net.errorcraft.testify.api.assertion.entity.EntityAssert;
 import net.errorcraft.testify.api.assertion.entity.EntityTypeAssert;
 import net.errorcraft.testify.api.assertion.entity.LivingEntityAssert;
@@ -12,16 +13,18 @@ import net.errorcraft.testify.internal.assertion.base.DoublesAssertImpl;
 import net.errorcraft.testify.internal.assertion.base.FloatsAssertImpl;
 import net.errorcraft.testify.internal.assertion.base.IntsAssertImpl;
 import net.errorcraft.testify.internal.assertion.base.LongsAssertImpl;
+import net.errorcraft.testify.internal.assertion.block.BlockStateAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.EntityAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.EntityTypeAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.LivingEntityAssertImpl;
 import net.errorcraft.testify.internal.assertion.item.ItemStackAssertImpl;
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.Nullable;
 
@@ -47,7 +50,7 @@ public class Asserter {
             return;
         }
 
-        throw this.helper.assertionException(Component.literal(message.get()));
+        throw this.helper.assertionException(message);
     }
 
     @Contract("true, _ -> fail")
@@ -56,7 +59,7 @@ public class Asserter {
             return;
         }
 
-        throw this.helper.assertionException(Component.literal(message.get()));
+        throw this.helper.assertionException(message);
     }
 
     @Contract("null, _ -> fail; !null, _ -> param1")
@@ -91,7 +94,7 @@ public class Asserter {
             return;
         }
 
-        throw this.helper.assertionException(Component.literal(message.get()));
+        throw this.helper.assertionException(message);
     }
 
     public <T, U extends T> void isInstance(T value, Class<U> expectedClass, String name, Consumer<U> assertion) {
@@ -114,7 +117,7 @@ public class Asserter {
             return;
         }
 
-        throw this.helper.assertionException(Component.literal(message.get()));
+        throw this.helper.assertionException(message);
     }
 
     public IntsAssert ints(int value) {
@@ -151,6 +154,16 @@ public class Asserter {
 
     public EntityTypeAssert entityType(ResourceKey<EntityType<?>> type) {
         return EntityTypeAssertImpl.create(this, type);
+    }
+
+    public BlockStateAssert blockState(BlockPos pos) {
+        BlockState state = this.helper.getBlockState(pos);
+        return BlockStateAssertImpl.create(this, pos, state, "block state");
+    }
+
+    public BlockStateAssert blockState(BlockPos pos, String name) {
+        BlockState state = this.helper.getBlockState(pos);
+        return BlockStateAssertImpl.create(this, pos, state, name);
     }
 
     public <A extends EntityAssert<A, E>, E extends Entity> EntityAssert<A, E> entity(@Nullable E entity) {

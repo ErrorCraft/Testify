@@ -29,6 +29,12 @@ public class EntityTypeAssertImpl implements EntityTypeAssert {
     }
 
     @Override
+    public EntityTypeAssert exists() {
+        this.asserter.helper().assertEntityPresent(this.type);
+        return this;
+    }
+
+    @Override
     public EntityTypeAssert existsAt(BlockPos pos) {
         this.asserter.helper().assertEntityPresent(this.type, pos);
         return this;
