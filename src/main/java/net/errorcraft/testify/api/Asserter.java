@@ -8,6 +8,7 @@ import net.errorcraft.testify.api.assertion.block.BlockStateAssert;
 import net.errorcraft.testify.api.assertion.entity.EntityAssert;
 import net.errorcraft.testify.api.assertion.entity.EntityTypeAssert;
 import net.errorcraft.testify.api.assertion.entity.LivingEntityAssert;
+import net.errorcraft.testify.api.assertion.fluid.FluidStateAssert;
 import net.errorcraft.testify.api.assertion.item.ItemStackAssert;
 import net.errorcraft.testify.internal.assertion.base.DoublesAssertImpl;
 import net.errorcraft.testify.internal.assertion.base.FloatsAssertImpl;
@@ -17,6 +18,7 @@ import net.errorcraft.testify.internal.assertion.block.BlockStateAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.EntityAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.EntityTypeAssertImpl;
 import net.errorcraft.testify.internal.assertion.entity.LivingEntityAssertImpl;
+import net.errorcraft.testify.internal.assertion.fluid.FluidStateAssertImpl;
 import net.errorcraft.testify.internal.assertion.item.ItemStackAssertImpl;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
@@ -25,6 +27,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.Nullable;
 
@@ -164,6 +167,16 @@ public class Asserter {
     public BlockStateAssert blockState(BlockPos pos, String name) {
         BlockState state = this.helper.getBlockState(pos);
         return BlockStateAssertImpl.create(this, pos, state, name);
+    }
+
+    public FluidStateAssert fluidState(BlockPos pos) {
+        FluidState state = this.helper.getFluidState(pos);
+        return FluidStateAssertImpl.create(this, pos, state, "fluid state");
+    }
+
+    public FluidStateAssert fluidState(BlockPos pos, String name) {
+        FluidState state = this.helper.getFluidState(pos);
+        return FluidStateAssertImpl.create(this, pos, state, name);
     }
 
     public <A extends EntityAssert<A, E>, E extends Entity> EntityAssert<A, E> entity(@Nullable E entity) {

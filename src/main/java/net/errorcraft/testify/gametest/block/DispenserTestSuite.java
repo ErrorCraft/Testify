@@ -7,6 +7,7 @@ import net.minecraft.references.BlockItemIds;
 import net.minecraft.references.ItemIds;
 import net.minecraft.world.entity.EntityTypeIds;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
+import net.minecraft.world.level.material.FluidIds;
 
 public class DispenserTestSuite {
     private static final BlockPos DISPENSER_POSITION = new BlockPos(2, 1, 3);
@@ -38,9 +39,11 @@ public class DispenserTestSuite {
         helper.startSequence()
             .thenExecute(() -> helper.pressButton(BUTTON_POSITION))
             .thenExecuteAfter(4, () -> {
-                helper.assertThat().blockState(ABOVE_OUTPUT_POSITION)
+                helper.assertThat()
+                    .blockState(ABOVE_OUTPUT_POSITION)
                     .isNot(BlockItemIds.AIR.block());
-                helper.assertThat().itemStack(dispenser.getItem(0))
+                helper.assertThat()
+                    .itemStack(dispenser.getItem(0))
                     .isEmpty();
             })
             .thenSucceed();
@@ -62,6 +65,40 @@ public class DispenserTestSuite {
                 helper.assertThat()
                     .itemStack(dispenser.getItem(0))
                     .is(ItemIds.BONE_MEAL);
+            })
+            .thenSucceed();
+    }
+
+    @GameTest(structure = "testify:block.dispenser.water")
+    public void dispensingBucketPicksUpFluid(TestifyGameTestHelper helper) {
+        DispenserBlockEntity dispenser = helper.getBlockEntity(DISPENSER_POSITION, DispenserBlockEntity.class);
+        dispenser.insertItem(helper.createStack(ItemIds.BUCKET));
+        helper.startSequence()
+            .thenExecute(() -> helper.pressButton(BUTTON_POSITION))
+            .thenExecuteAfter(4, () -> {
+                helper.assertThat()
+                    .fluidState(OUTPUT_POSITION)
+                    .is(FluidIds.EMPTY);
+                helper.assertThat()
+                    .itemStack(dispenser.getItem(0))
+                    .is(ItemIds.WATER_BUCKET);
+            })
+            .thenSucceed();
+    }
+
+    @GameTest(structure = "testify:block.dispenser")
+    public void dispensingBucketWithNothingToPickUpDropsItem(TestifyGameTestHelper helper) {
+        DispenserBlockEntity dispenser = helper.getBlockEntity(DISPENSER_POSITION, DispenserBlockEntity.class);
+        dispenser.insertItem(helper.createStack(ItemIds.BUCKET));
+        helper.startSequence()
+            .thenExecute(() -> helper.pressButton(BUTTON_POSITION))
+            .thenExecuteAfter(4, () -> {
+                helper.assertThat()
+                    .entityType(EntityTypeIds.ITEM)
+                    .exists();
+                helper.assertThat()
+                    .itemStack(dispenser.getItem(0))
+                    .isEmpty();
             })
             .thenSucceed();
     }

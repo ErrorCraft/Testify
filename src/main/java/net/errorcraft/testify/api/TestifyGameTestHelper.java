@@ -17,6 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -40,6 +41,10 @@ public class TestifyGameTestHelper extends GameTestHelper {
 
     public GameTestAssertPosException assertionException(BlockPos pos, Supplier<String> description) {
         return this.assertionException(pos, Component.literal(description.get()));
+    }
+
+    public FluidState getFluidState(BlockPos pos) {
+        return this.getLevel().getFluidState(this.absolutePos(pos));
     }
 
     public <E extends Entity> List<E> findEntitiesAt(EntityType<E> type, BlockPos pos) {
