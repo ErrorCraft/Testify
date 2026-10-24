@@ -28,7 +28,11 @@
     ]
   },
   "mixins": [
-    "testify.mixins.json"
+    "testify.mixins.json",
+    {
+      "config": "testify.client.mixins.json",
+      "environment": "client"
+    }
   ],
   "accessWidener": "testify.classtweaker",
   "depends": {

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.errorcraft.testify.internal.mixin.client",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "gui.screens.inventory.TestInstanceBlockEditScreenExtender"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
