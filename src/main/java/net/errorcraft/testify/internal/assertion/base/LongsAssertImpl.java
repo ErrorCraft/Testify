@@ -35,15 +35,15 @@ public class LongsAssertImpl implements LongsAssert {
     }
 
     @Override
-    public LongsAssert doesNotEqual(long expected) {
-        if (this.value != expected) {
+    public LongsAssert doesNotEqual(long unexpected) {
+        if (this.value != unexpected) {
             return this;
         }
 
         throw this.asserter.helper().assertionException(
             "test.error.numeric.expected_not_equal",
             this.name,
-            expected,
+            unexpected,
             this.value
         );
     }
@@ -157,15 +157,15 @@ public class LongsAssertImpl implements LongsAssert {
     }
 
     @Override
-    public LongsAssert congruent(long modulus, Consumer<LongsAssert> congruent) {
-        if (modulus == 0) {
-            throw this.asserter.helper().assertionException("test.error.numeric.invalid_modulus");
+    public LongsAssert remainder(long divisor, Consumer<LongsAssert> remainder) {
+        if (divisor == 0) {
+            throw this.asserter.helper().assertionException("test.error.numeric.invalid_divisor");
         }
 
-        congruent.accept(
+        remainder.accept(
             this.asserter.longs(
-                Math.floorMod(this.value, modulus),
-                this.name + " (congruent to " + modulus + ")"
+                Math.floorMod(this.value, divisor),
+                this.name + " (remainder of " + this.value + " / " + divisor + ")"
             )
         );
         return this;

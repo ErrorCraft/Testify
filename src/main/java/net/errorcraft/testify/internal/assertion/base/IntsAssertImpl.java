@@ -35,15 +35,15 @@ public class IntsAssertImpl implements IntsAssert {
     }
 
     @Override
-    public IntsAssert doesNotEqual(int expected) {
-        if (this.value != expected) {
+    public IntsAssert doesNotEqual(int unexpected) {
+        if (this.value != unexpected) {
             return this;
         }
 
         throw this.asserter.helper().assertionException(
             "test.error.numeric.expected_not_equal",
             this.name,
-            expected,
+            unexpected,
             this.value
         );
     }
@@ -157,15 +157,15 @@ public class IntsAssertImpl implements IntsAssert {
     }
 
     @Override
-    public IntsAssert congruent(int modulus, Consumer<IntsAssert> congruent) {
-        if (modulus == 0) {
-            throw this.asserter.helper().assertionException("test.error.numeric.invalid_modulus");
+    public IntsAssert remainder(int divisor, Consumer<IntsAssert> remainder) {
+        if (divisor == 0) {
+            throw this.asserter.helper().assertionException("test.error.numeric.invalid_divisor");
         }
 
-        congruent.accept(
+        remainder.accept(
             this.asserter.ints(
-                Math.floorMod(this.value, modulus),
-                this.name + " (congruent to " + modulus + ")"
+                Math.floorMod(this.value, divisor),
+                this.name + " (remainder of " + this.value + " / " + divisor + ")"
             )
         );
         return this;

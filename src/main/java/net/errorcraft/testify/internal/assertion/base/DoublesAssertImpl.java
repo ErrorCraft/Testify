@@ -59,20 +59,20 @@ public class DoublesAssertImpl implements DoublesAssert {
     }
 
     @Override
-    public DoublesAssert doesNotEqual(double expected) {
-        if (this.value != expected) {
+    public DoublesAssert doesNotEqual(double unexpected) {
+        if (this.value != unexpected) {
             return this;
         }
 
         throw this.asserter.helper().assertionException(
             "test.error.numeric.expected_not_equal",
             this.name,
-            expected
+            unexpected
         );
     }
 
     @Override
-    public DoublesAssert doesNotEqual(double expected, double epsilon) {
+    public DoublesAssert doesNotEqual(double unexpected, double epsilon) {
         if (epsilon <= 0.0f) {
             throw this.asserter.helper().assertionException(
                 "test.error.numeric.invalid_epsilon",
@@ -80,7 +80,7 @@ public class DoublesAssertImpl implements DoublesAssert {
             );
         }
 
-        double absoluteDifference = Math.abs(this.value - expected);
+        double absoluteDifference = Math.abs(this.value - unexpected);
         if (absoluteDifference >= epsilon) {
             return this;
         }
@@ -88,7 +88,7 @@ public class DoublesAssertImpl implements DoublesAssert {
         throw this.asserter.helper().assertionException(
             "test.error.numeric.expected_not_equal.epsilon",
             this.name,
-            expected,
+            unexpected,
             epsilon
         );
     }
@@ -202,15 +202,15 @@ public class DoublesAssertImpl implements DoublesAssert {
     }
 
     @Override
-    public DoublesAssert congruent(double modulus, Consumer<DoublesAssert> congruent) {
-        if (modulus == 0) {
-            throw this.asserter.helper().assertionException("test.error.numeric.invalid_modulus");
+    public DoublesAssert remainder(double divisor, Consumer<DoublesAssert> remainder) {
+        if (divisor == 0) {
+            throw this.asserter.helper().assertionException("test.error.numeric.invalid_divisor");
         }
 
-        congruent.accept(
+        remainder.accept(
             this.asserter.doubles(
-                Mth.positiveModulo(this.value, modulus),
-                this.name + " (congruent to " + modulus + ")"
+                Mth.positiveModulo(this.value, divisor),
+                this.name + " (remainder of " + this.value + " / " + divisor + ")"
             )
         );
         return this;
