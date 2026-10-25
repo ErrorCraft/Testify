@@ -24,9 +24,9 @@ public class ArmorStandTestSuite {
         ItemStack stack = helper.createStack(ItemIds.ARMOR_STAND);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
-        helper.getLevel().addFreshEntity(player);
         helper.interactWithBlock(GROUND_USE_POSITION, player, Direction.UP);
-        helper.succeedIf(() -> helper.assertThat().entityType(EntityTypeIds.ARMOR_STAND)
+        helper.succeedIf(() -> helper.assertThat()
+            .entityType(EntityTypeIds.ARMOR_STAND)
             .existsAt(PLACED_ENTITY_POSITION));
     }
 
@@ -35,9 +35,9 @@ public class ArmorStandTestSuite {
         ItemStack stack = helper.createStack(ItemIds.ARMOR_STAND);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
-        helper.getLevel().addFreshEntity(player);
         helper.interactWithBlock(HIGH_USE_POSITION, player, Direction.DOWN);
-        helper.succeedIf(() -> helper.assertThat().entityType(EntityTypeIds.ARMOR_STAND)
+        helper.succeedIf(() -> helper.assertThat()
+            .entityType(EntityTypeIds.ARMOR_STAND)
             .doesNotExist());
     }
 
@@ -46,9 +46,9 @@ public class ArmorStandTestSuite {
         ItemStack stack = helper.createStack(ItemIds.ARMOR_STAND);
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
-        helper.getLevel().addFreshEntity(player);
         helper.interactWithBlock(GROUND_USE_POSITION, player, Direction.UP);
-        helper.succeedIf(() -> helper.assertThat().entityType(EntityTypeIds.ARMOR_STAND)
+        helper.succeedIf(() -> helper.assertThat()
+            .entityType(EntityTypeIds.ARMOR_STAND)
             .doesNotExist());
     }
 
@@ -58,14 +58,15 @@ public class ArmorStandTestSuite {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         player.setYRot(USER_ANGLE);
-        helper.getLevel().addFreshEntity(player);
         helper.interactWithBlock(GROUND_USE_POSITION, player, Direction.UP);
-        helper.succeedIf(() -> helper.assertThat().entityType(EntityTypeIds.ARMOR_STAND)
+        helper.succeedIf(() -> helper.assertThat()
+            .entityType(EntityTypeIds.ARMOR_STAND)
             .existsAt(
                 PLACED_ENTITY_POSITION,
                 ArmorStand.class,
-                armorStand -> armorStand.hasYRotation(yRotation -> yRotation
-                    .equals(SPAWNED_ENTITY_ANGLE))
+                armorStand -> armorStand
+                    .hasYRotation(yRotation -> yRotation
+                        .equals(SPAWNED_ENTITY_ANGLE))
             ));
     }
 }
