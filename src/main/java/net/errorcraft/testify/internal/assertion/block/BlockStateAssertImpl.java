@@ -90,18 +90,18 @@ public class BlockStateAssertImpl implements BlockStateAssert {
     }
 
     @Override
-    public <T extends Comparable<T>> BlockStateAssert hasPropertyValue(Property<T> property, T value) {
+    public <T extends Comparable<T>> BlockStateAssert hasPropertyValue(Property<T> property, T expectedValue) {
         if (!this.state.hasProperty(property)) {
             throw this.asserter.helper().assertionException(
                 this.pos,
                 "test.error.block_property_missing",
                 property.getName(),
-                value
+                expectedValue
             );
         }
 
         T actual = this.state.getValue(property);
-        if (value.equals(actual)) {
+        if (expectedValue.equals(actual)) {
             return this;
         }
 
@@ -109,24 +109,24 @@ public class BlockStateAssertImpl implements BlockStateAssert {
             this.pos,
             "test.error.block_property_mismatch",
             property.getName(),
-            value,
+            expectedValue,
             actual
         );
     }
 
     @Override
-    public <T extends Comparable<T>> BlockStateAssert doesNotHavePropertyValue(Property<T> property, T value) {
+    public <T extends Comparable<T>> BlockStateAssert doesNotHavePropertyValue(Property<T> property, T unexpectedValue) {
         if (!this.state.hasProperty(property)) {
             throw this.asserter.helper().assertionException(
                 this.pos,
                 "test.error.block_property_missing",
                 property.getName(),
-                value
+                unexpectedValue
             );
         }
 
         T actual = this.state.getValue(property);
-        if (!value.equals(actual)) {
+        if (!unexpectedValue.equals(actual)) {
             return this;
         }
 
@@ -134,23 +134,23 @@ public class BlockStateAssertImpl implements BlockStateAssert {
             this.pos,
             "test.error.block.did_not_expect_property_value",
             property.getName(),
-            value
+            unexpectedValue
         );
     }
 
     @Override
-    public <T extends Comparable<T>> BlockStateAssert hasPropertyValue(Property<T> property, T value, Supplier<String> message) {
+    public <T extends Comparable<T>> BlockStateAssert hasPropertyValue(Property<T> property, T expectedValue, Supplier<String> message) {
         if (!this.state.hasProperty(property)) {
             throw this.asserter.helper().assertionException(
                 this.pos,
                 "test.error.block_property_missing",
                 property.getName(),
-                value
+                expectedValue
             );
         }
 
         T actual = this.state.getValue(property);
-        if (value.equals(actual)) {
+        if (expectedValue.equals(actual)) {
             return this;
         }
 
@@ -158,18 +158,18 @@ public class BlockStateAssertImpl implements BlockStateAssert {
     }
 
     @Override
-    public <T extends Comparable<T>> BlockStateAssert doesNotHavePropertyValue(Property<T> property, T value, Supplier<String> message) {
+    public <T extends Comparable<T>> BlockStateAssert doesNotHavePropertyValue(Property<T> property, T unexpectedValue, Supplier<String> message) {
         if (!this.state.hasProperty(property)) {
             throw this.asserter.helper().assertionException(
                 this.pos,
                 "test.error.block_property_missing",
                 property.getName(),
-                value
+                unexpectedValue
             );
         }
 
         T actual = this.state.getValue(property);
-        if (value.equals(actual)) {
+        if (unexpectedValue.equals(actual)) {
             return this;
         }
 

@@ -64,7 +64,7 @@ public class ArmorStandTestSuite {
             .existsAt(
                 PLACED_ENTITY_POSITION,
                 ArmorStand.class,
-                armorStand -> armorStand.yRotation(yRotation -> yRotation
+                armorStand -> armorStand.hasYRotation(yRotation -> yRotation
                     .equals(SPAWNED_ENTITY_ANGLE))
             ));
     }

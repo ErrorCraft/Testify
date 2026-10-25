@@ -36,13 +36,13 @@ public class EntityAssertImpl<A extends EntityAssert<A, E>, E extends Entity> im
     }
 
     @Override
-    public A xRotation(Consumer<FloatsAssert> xRotation) {
+    public A hasXRotation(Consumer<FloatsAssert> xRotation) {
         xRotation.accept(this.asserter.floats(Mth.wrapDegrees(this.entity.getXRot()), "x rotation"));
         return this.self();
     }
 
     @Override
-    public A yRotation(Consumer<FloatsAssert> yRotation) {
+    public A hasYRotation(Consumer<FloatsAssert> yRotation) {
         yRotation.accept(this.asserter.floats(Mth.wrapDegrees(this.entity.getYRot()), "y rotation"));
         return this.self();
     }

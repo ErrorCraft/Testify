@@ -119,34 +119,34 @@ public class ItemStackAssertImpl implements ItemStackAssert {
     }
 
     @Override
-    public <T> ItemStackAssert hasComponent(DataComponentType<T> type) {
-        if (this.stack.has(type)) {
+    public <T> ItemStackAssert hasComponent(DataComponentType<T> expectedType) {
+        if (this.stack.has(expectedType)) {
             return this;
         }
 
         throw this.asserter.helper().assertionException(
             "test.error.general.expected_data_component",
             this.name,
-            type
+            expectedType
         );
     }
 
     @Override
-    public <T> ItemStackAssert hasComponent(DataComponentType<T> type, Consumer<T> assertion) {
-        assertion.accept(this.asserter.helper().getDataComponent(this.stack, type));
+    public <T> ItemStackAssert hasComponent(DataComponentType<T> expectedType, Consumer<T> component) {
+        component.accept(this.asserter.helper().getDataComponent(this.stack, expectedType));
         return this;
     }
 
     @Override
-    public <T> ItemStackAssert doesNotHaveComponent(DataComponentType<T> type) {
-        if (!this.stack.has(type)) {
+    public <T> ItemStackAssert doesNotHaveComponent(DataComponentType<T> unexpectedType) {
+        if (!this.stack.has(unexpectedType)) {
             return this;
         }
 
         throw this.asserter.helper().assertionException(
             "test.error.general.did_not_expect_data_component",
             this.name,
-            type
+            unexpectedType
         );
     }
 }
