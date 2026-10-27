@@ -17,6 +17,7 @@
   "test.error.numeric.expected_non_positive": "Expected %s to be non-positive, got %s instead",
   "test.error.numeric.invalid_divisor": "Divisor must not be 0",
   "test.error.numeric.invalid_epsilon": "Epsilon must be positive, got %s instead",
+  "test.error.registry.expected_holder": "Expected %s to be present in registry %s",
   "test.error.registry.expected_id": "Expected %s to be %s, got %s instead",
   "test.error.registry.did_not_expect_id": "Expected %s not to be %s",
   "test.error.registry.expected_tag": "Expected %s to be part of %s",

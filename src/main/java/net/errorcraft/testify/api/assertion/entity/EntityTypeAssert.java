@@ -10,7 +10,15 @@ public interface EntityTypeAssert {
     /// Tests whether any entity with the entity type exists anywhere within the GameTest's bounds.
     /// @return This [EntityTypeAssert] instance.
     /// @throws GameTestException If no entity with the entity type is found.
+    /// @see EntityTypeAssert#exists(int)
     EntityTypeAssert exists();
+
+    /// Tests whether `expectedAmount` entities with the entity type exist anywhere within the GameTest's bounds.
+    /// @param expectedEntityCount The number of entities that should exist.
+    /// @return This [EntityTypeAssert] instance.
+    /// @throws GameTestException If the number of entities found differs from the expected count.
+    /// @see EntityTypeAssert#doesNotExist()
+    EntityTypeAssert exists(int expectedEntityCount);
 
     /// Tests whether any entity with the entity type exists within the specified block position.
     /// @param pos The block position.

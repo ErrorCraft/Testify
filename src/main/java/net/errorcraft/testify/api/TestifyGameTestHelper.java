@@ -184,6 +184,20 @@ public class TestifyGameTestHelper extends GameTestHelper {
             .get(id);
     }
 
+    /// Gets a [Holder.Reference] from the registry specified by `id`.
+    /// @param id The holder id.
+    /// @return The holder as specified by `id`.
+    /// @param <T> The type of the holder.
+    /// @throws GameTestException If `id` is not present in its registry.
+    public <T> Holder.Reference<T> getHolderOrThrow(ResourceKey<T> id) {
+        return this.getHolder(id)
+            .orElseThrow(() -> this.assertionException(
+                "test.error.registry.expected_holder",
+                id.identifier(),
+                id.registry()
+            ));
+    }
+
     /// Makes `player` interact with the block at `pos` on the `direction` side of that block.
     /// @param pos The block position of the block the Player is interacting with.
     /// @param player The Player interacting with the block.
