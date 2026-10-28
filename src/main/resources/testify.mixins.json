@@ -6,7 +6,10 @@
     "gametest.framework.GameTestHelperAccessor",
     "gametest.framework.GameTestHelperExtender",
     "gametest.framework.StructureUtilsExtender",
-    "resources.ResourceManagerRegistryLoadTaskExtender"
+    "resources.ResourceManagerRegistryLoadTaskExtender",
+    "world.level.levelgen.structure.templatesystem.StructureTemplateManagerAccessor",
+    "world.level.levelgen.structure.templatesystem.StructureTemplateManagerExtender",
+    "world.level.levelgen.structure.templatesystem.loader.ResourceManagerTemplateSourceExtender"
   ],
   "injectors": {
     "defaultRequire": 1
