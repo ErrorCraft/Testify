@@ -1,0 +1,25 @@
+{
+    DataVersion: 5023,
+    size: [3, 3, 3],
+    data: [
+        {pos: [0, 0, 0], state: "minecraft:bedrock"},
+        {pos: [0, 0, 1], state: "minecraft:bedrock"},
+        {pos: [0, 0, 2], state: "minecraft:bedrock"},
+        {pos: [1, 0, 0], state: "minecraft:bedrock"},
+        {pos: [1, 0, 1], state: "minecraft:bedrock"},
+        {pos: [1, 0, 2], state: "minecraft:bedrock"},
+        {pos: [2, 0, 0], state: "minecraft:bedrock"},
+        {pos: [2, 0, 1], state: "minecraft:bedrock"},
+        {pos: [2, 0, 2], state: "minecraft:bedrock"},
+        {pos: [0, 1, 1], state: "minecraft:rail{shape:east_west,waterlogged:false}"},
+        {pos: [1, 1, 1], state: "minecraft:rail{shape:ascending_east,waterlogged:false}"},
+        {pos: [2, 1, 1], state: "minecraft:bedrock"},
+        {pos: [2, 2, 1], state: "minecraft:rail{shape:east_west,waterlogged:false}"}
+    ],
+    entities: [],
+    palette: [
+        "minecraft:bedrock",
+        "minecraft:rail{shape:east_west,waterlogged:false}",
+        "minecraft:rail{shape:ascending_east,waterlogged:false}"
+    ]
+}

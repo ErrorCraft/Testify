@@ -30,6 +30,7 @@
       "net.errorcraft.testify.gametest.item.FishingRodTestSuite",
       "net.errorcraft.testify.gametest.item.GoatHornTestSuite",
       "net.errorcraft.testify.gametest.item.HoneyBottleTestSuite",
+      "net.errorcraft.testify.gametest.item.MinecartTestSuite",
       "net.errorcraft.testify.gametest.SimpleItemStackTestSuite"
     ]
   },
