@@ -80,12 +80,50 @@ public class Asserter {
         throw this.helper.assertionException(message);
     }
 
+    /// Tests whether `object` is `null` and fails otherwise.
+    /// @param object The object to check.
+    /// @param name A description of `object` to use in the exception when it is not `null`.
+    /// @param <T> The type of the object.
+    /// @throws GameTestException If `object` is not `null`.
+    /// @see Asserter#isNull(Object, Supplier)
+    /// @see Asserter#isNotNull(Object, String)
+    @Contract("!null, _ -> fail")
+    public <T> void isNull(@Nullable T object, String name) {
+        if (object == null) {
+            return;
+        }
+
+        throw this.helper.assertionException(
+            "test.error.general.expected_null",
+            name,
+            object
+        );
+    }
+
+    /// Tests whether `object` is `null` and fails otherwise.
+    /// @param object The object to check.
+    /// @param message The message to supply when `object` is not `null`.
+    /// @param <T> The type of the object.
+    /// @throws GameTestException If `object` is not `null`.
+    /// @see Asserter#isNull(Object, String)
+    /// @see Asserter#isNotNull(Object, Supplier)
+    @Contract("!null, _ -> fail")
+    public <T> void isNull(@Nullable T object, Supplier<String> message) {
+        if (object == null) {
+            return;
+        }
+
+        throw this.helper.assertionException(message);
+    }
+
     /// Tests whether `object` is not `null` and fails otherwise.
     /// @param object The object to check.
     /// @param name A description of `object` to use in the exception when it is `null`.
     /// @return `object` if it is not `null`.
     /// @param <T> The type of the object.
     /// @throws GameTestException If `object` is `null`.
+    /// @see Asserter#isNotNull(Object, Supplier)
+    /// @see Asserter#isNull(Object, String)
     @Contract("null, _ -> fail; !null, _ -> param1")
     public <T> T isNotNull(@Nullable T object, String name) {
         if (object != null) {
@@ -93,9 +131,26 @@ public class Asserter {
         }
 
         throw this.helper.assertionException(
-            "test.error.general.expected_not_null",
+            "test.error.general.did_not_expect_null",
             name
         );
+    }
+
+    /// Tests whether `object` is not `null` and fails otherwise.
+    /// @param object The object to check.
+    /// @param message The message to supply when `object` is `null`.
+    /// @return `object` if it is not `null`.
+    /// @param <T> The type of the object.
+    /// @throws GameTestException If `object` is `null`.
+    /// @see Asserter#isNotNull(Object, String)
+    /// @see Asserter#isNull(Object, Supplier)
+    @Contract("null, _ -> fail; !null, _ -> param1")
+    public <T> T isNotNull(@Nullable T object, Supplier<String> message) {
+        if (object != null) {
+            return object;
+        }
+
+        throw this.helper.assertionException(message);
     }
 
     /// Tests whether `value` and `expected` are considered equal as per [Objects#equals(Object, Object)].

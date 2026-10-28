@@ -1,5 +1,6 @@
 {
-  "test.error.general.expected_not_null": "Expected %s to exist",
+  "test.error.general.expected_null": "Expected %s to be null, got %s instead",
+  "test.error.general.did_not_expect_null": "Expected %s not to be null",
   "test.error.general.expected_type": "Expected %s to be %s, got %s instead",
   "test.error.general.expected_data_component": "Expected %s to have the %s data component",
   "test.error.general.did_not_expect_data_component": "Expected %s not to have the %s data component",
